@@ -1,0 +1,31 @@
+name: Build Media Curator
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Install .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Build (self-contained, Windows x64)
+        run: dotnet publish MediaCurator/MediaCurator.csproj -c Release -r win-x64 --self-contained true -o publish/MediaCurator
+
+      - name: Add README
+        run: Copy-Item README.txt publish/MediaCurator/README.txt
+        shell: pwsh
+
+      - name: Upload the finished app
+        uses: actions/upload-artifact@v4
+        with:
+          name: MediaCurator_Windows_v0.1.0
+          path: publish
