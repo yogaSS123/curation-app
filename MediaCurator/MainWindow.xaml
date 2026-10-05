@@ -1,0 +1,83 @@
+<Window x:Class="MediaCurator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Media Curator" Height="720" Width="1200"
+        MinHeight="520" MinWidth="900"
+        Background="#1E1E1E" Foreground="#EEEEEE"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="290"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- LEFT SIDE: tabs, preview, file info -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Top bar -->
+            <DockPanel Grid.Row="0" Margin="12,10,12,10" LastChildFill="True">
+                <RadioButton x:Name="TabPhoto" Content="PHOTO" GroupName="Tabs" IsChecked="True"
+                             Click="Tab_Click" Margin="0,0,16,0" FontWeight="Bold" FontSize="14"
+                             Foreground="#EEEEEE" VerticalAlignment="Center"/>
+                <RadioButton x:Name="TabVideo" Content="VIDEO" GroupName="Tabs"
+                             Click="Tab_Click" Margin="0,0,24,0" FontWeight="Bold" FontSize="14"
+                             Foreground="#EEEEEE" VerticalAlignment="Center"/>
+                <Button x:Name="BtnSource" Content="Select Source Folder" DockPanel.Dock="Right"
+                        Padding="12,5" Click="BtnSource_Click"/>
+                <TextBlock x:Name="SourceText" Text="No source folder selected"
+                           Foreground="#AAAAAA" VerticalAlignment="Center" Margin="0,0,12,0"
+                           TextTrimming="CharacterEllipsis"/>
+            </DockPanel>
+
+            <!-- Preview area -->
+            <Border Grid.Row="1" Background="#111111" Margin="12,0,12,0">
+                <TextBlock x:Name="PreviewText" Text="MEDIA PREVIEW"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontSize="24" Foreground="#555555"/>
+            </Border>
+
+            <!-- File info bar -->
+            <DockPanel Grid.Row="2" Margin="12,10,12,12">
+                <TextBlock x:Name="CounterText" Text="PHOTO 0 / 0" DockPanel.Dock="Right"
+                           FontSize="16" FontWeight="Bold"/>
+                <TextBlock x:Name="FileNameText" Text="(no file)" FontSize="16"
+                           Foreground="#CCCCCC" TextTrimming="CharacterEllipsis"/>
+            </DockPanel>
+        </Grid>
+
+        <!-- RIGHT SIDE: curation + output -->
+        <Border Grid.Column="1" Background="#262626" Padding="14">
+            <StackPanel>
+                <TextBlock Text="CURATE" FontWeight="Bold" FontSize="14" Margin="0,0,0,8"/>
+                <Button Content="GOOD  (1)" Height="44" Margin="0,0,0,6" FontWeight="Bold"
+                        Background="#2E7D32" Foreground="White"/>
+                <Button Content="MAYBE  (2)" Height="44" Margin="0,0,0,6" FontWeight="Bold"
+                        Background="#F9A825" Foreground="Black"/>
+                <Button Content="BAD  (3)" Height="44" Margin="0,0,0,18" FontWeight="Bold"
+                        Background="#C62828" Foreground="White"/>
+
+                <TextBlock Text="OUTPUT" FontWeight="Bold" FontSize="14" Margin="0,0,0,8"/>
+
+                <TextBlock Text="GOOD" Foreground="#AAAAAA"/>
+                <Button Content="Select Folder..." Margin="0,2,0,8" Padding="6,4"/>
+                <TextBlock Text="MAYBE" Foreground="#AAAAAA"/>
+                <Button Content="Select Folder..." Margin="0,2,0,8" Padding="6,4"/>
+                <TextBlock Text="BAD" Foreground="#AAAAAA"/>
+                <Button Content="Select Folder..." Margin="0,2,0,18" Padding="6,4"/>
+
+                <TextBlock Text="MODE" FontWeight="Bold" FontSize="14" Margin="0,0,0,8"/>
+                <RadioButton Content="COPY (originals stay)" GroupName="Mode" IsChecked="True"
+                             Foreground="#EEEEEE" Margin="0,0,0,4"/>
+                <RadioButton Content="MOVE (originals removed)" GroupName="Mode"
+                             Foreground="#EEEEEE" Margin="0,0,0,18"/>
+
+                <Button Content="PROCESS FILES" Height="40" FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
